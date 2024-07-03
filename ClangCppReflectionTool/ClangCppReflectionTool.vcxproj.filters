@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="IBuilder.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ICppClassData.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataField.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnum.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IMacro.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IMethod.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRDataField.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IReflectedClass.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="IRMethod.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="ISerializable.h">
+      <Filter>Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="CCRTHeaderGenerator.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ClangCppParser.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="CppClassData.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="CppClassBuilder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="DataField.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Macro.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroBuilder.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Method.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="RDataField.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="ReflectedClass.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="RMethod.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="AccessSpecifier.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCRT.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CCRTManager.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CCRTHeaderGenerator.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ClangCppParser.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CppClassData.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CppClassBuilder.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DataField.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Enum.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Macro.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroBuilder.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MacroManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Method.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RDataField.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ReflectedClass.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="RMethod.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessSpecifier.cpp">
+      <Filter>Header</Filter>
+    </ClCompile>
+    <ClCompile Include="CCRTManager.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Interface">
+      <UniqueIdentifier>{963920d4-d800-4e2b-8c4c-1c01d01bb883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{6678996b-4fcc-40c1-8d19-d31f5925eb72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{00b2b66e-8277-4b8d-9ab4-1efcacc4265d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
