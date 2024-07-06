@@ -4,8 +4,7 @@
 
 namespace ccrt
 {
-
-	class CRRTAPI IDataField : public ISerializable
+	class IDataField : public ISerializable
 	{
 
 	public:
@@ -13,6 +12,6 @@ namespace ccrt
 		virtual std::string GetType() = 0;
 		virtual std::string GetUSR() = 0;
 		virtual std::string GetDefaultValue() = 0;
-		virtual std::string GetAccessSpecifier() = 0;
+		virtual AccessSpecifier GetAccessSpecifier() = 0;
 	};
 }

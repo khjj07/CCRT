@@ -1,12 +1,17 @@
 ﻿#pragma once
+#include <vector>
 #include "Define.h"
-#include "Define.h"
+
 
 namespace ccrt
 {
     class CRRTAPI IRMethod
     {
     public:
+        virtual AccessSpecifier GetAccessSpecifier() = 0;
+        virtual std::string GetName() = 0;
+        virtual std::string GetReturnType() = 0;
+
         template<typename ReturnType, typename... Args>
         ReturnType Invoke(Args... a1) const
         {

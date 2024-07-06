@@ -32,7 +32,7 @@ std::vector<ccrt::ICppClassData*> ccrt::ClangCppParser::GenerateCppClassFromFold
 	std::vector<ccrt::ICppClassData*> result;
 	std::filesystem::path path(folderPath);
 	for (const auto& entry : std::filesystem::directory_iterator(path)) {
-		if (entry.is_regular_file())
+		if (entry.is_regular_file() && entry.path().extension() == ".hh")
 		{
 			result.push_back(GenerateCppClassFromFile(entry.path().generic_string(), commandLineArgs, numCommandLineArgs));
 		}
@@ -92,6 +92,7 @@ ccrt::ICppClassData* ccrt::ClangCppParser::GenerateCppClassFromFile(std::string 
 	builder.SetDirectoryPath(path.parent_path().generic_string());
 	builder.SetFilePath(filepath);
 	CXCursor cursor = GetCursor(Translate(filepath,commandLineArgs,numCommandLineArgs));
+	macroManager_.Reset();
 	clang_visitChildren(cursor, FileVisitor, &builder);
 	return builder.Build();
 }

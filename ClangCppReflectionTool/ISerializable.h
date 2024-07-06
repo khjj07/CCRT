@@ -4,7 +4,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI ISerializable
+	class ISerializable
 	{
 	public:
 		virtual void Serialize(std::ostringstream& stream) = 0;

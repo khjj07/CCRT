@@ -1,16 +1,21 @@
-﻿#include "CCRTManager.h"
+﻿#include <unordered_map>
+#include "Util.h"
+#include "CCRTManager.h"
 
-std::vector<ccrt::IReflectedClass*> ccrt::CCRTManager::classes;
+std::unordered_map<std::string,ccrt::IReflectedClass*> ccrt::CCRTManager::reflectedClasses_;
 
 void ccrt::CCRTManager::Register(IReflectedClass* reflectedClass)
 {
-	classes.push_back(reflectedClass);
+	std::string guid = GenerateGUID();
+	reflectedClass->SetID(guid);
+	reflectedClasses_.insert(std::make_pair(guid, reflectedClass));
 }
+
 
 void ccrt::CCRTManager::Initialize()
 {
-	for (auto reflectedClass : classes)
+	for (auto reflectedClass : reflectedClasses_)
 	{
-		reflectedClass->ApplyReflectionData();
+		reflectedClass.second->ApplyReflectionData();
 	}
 }

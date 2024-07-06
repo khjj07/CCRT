@@ -50,13 +50,13 @@ ccrt::CppClassBuilder& ccrt::CppClassBuilder::AddBaseClass(std::string usr)
 
 ccrt::CppClassBuilder& ccrt::CppClassBuilder::AddDataField(std::string type, std::string name, std::string usr, std::string defaultValue)
 {
-	dataFields.push_back(std::make_shared<DataField>(AccessSpecifierToString(currentAccessSpecifier),type, name, usr, defaultValue));
+	dataFields.push_back(std::make_shared<DataField>(currentAccessSpecifier,type, name, usr, defaultValue));
 	return *this;
 }
 
 ccrt::CppClassBuilder& ccrt::CppClassBuilder::AddMethods(std::string returnType, std::string name,std::vector<std::string> arguments)
 {
-	methods.push_back(std::make_shared<Method>(AccessSpecifierToString(currentAccessSpecifier), returnType, name, arguments));
+	methods.push_back(std::make_shared<Method>(currentAccessSpecifier, returnType, name, arguments));
 	return *this;
 }
 
@@ -75,19 +75,19 @@ ccrt::CppClassBuilder& ccrt::CppClassBuilder::AddEnumConstant(std::string consta
 
 ccrt::CppClassBuilder& ccrt::CppClassBuilder::SetPublic()
 {
-	currentAccessSpecifier = AccessSpecifier::Public;
+	currentAccessSpecifier = Public;
 	return *this;
 }
 
 ccrt::CppClassBuilder& ccrt::CppClassBuilder::SetProtected()
 {
-	currentAccessSpecifier = AccessSpecifier::Protected;
+	currentAccessSpecifier = Protected;
 	return *this;
 }
 
 ccrt::CppClassBuilder& ccrt::CppClassBuilder::SetPrivate()
 {
-	currentAccessSpecifier = AccessSpecifier::Private;
+	currentAccessSpecifier = Private;
 	return *this;
 }
 

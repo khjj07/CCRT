@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8e6c1bb4-0e0a-4093-b5a8-931a2a39e55a}</ProjectGuid>
-    <RootNamespace>CCRTExample</RootNamespace>
+    <ProjectGuid>{7a91d0f4-d49c-4817-b665-1683028d9516}</ProjectGuid>
+    <RootNamespace>ClangCppHeaderTool</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -113,9 +113,6 @@
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty\lib;$(SolutionDir)$(PlatformTarget)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>LLVM\libclang.lib;ClangCppReflectionTool.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PreBuildEvent>
-      <Command>$(SolutionDir)$(PlatformTarget)\$(Configuration)\ClangCppHeaderTool.exe D:/CCRT/CCRTExample/</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -134,13 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Foo.cpp" />
-    <ClCompile Include="Bar.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Bar.hh" />
-    <ClInclude Include="Foo.hh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

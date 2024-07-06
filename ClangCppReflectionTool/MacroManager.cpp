@@ -25,3 +25,8 @@ std::shared_ptr<ccrt::IMacro> ccrt::MacroManager::GetCurrentMacro(unsigned line)
 	}
 	return currentMacro;
 }
+
+void ccrt::MacroManager::Reset()
+{
+	macros.clear();
+}

@@ -5,7 +5,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI IEnum : public ISerializable
+	class IEnum : public ISerializable
 	{
 	public:
 		virtual std::string GetName() = 0;

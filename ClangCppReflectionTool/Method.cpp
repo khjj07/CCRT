@@ -2,14 +2,14 @@
 
 #include <cstdarg>
 
-ccrt::Method::Method(std::string accessSpecifier, std::string returnType, std::string name, std::vector<std::string> arguments)
+ccrt::Method::Method(AccessSpecifier accessSpecifier, std::string returnType, std::string name, std::vector<std::string> arguments)
 	: accessSpecifier_(accessSpecifier), returnType_(returnType), name_(name), arguments_(arguments)
 {
 
 }
 
 
-std::string ccrt::Method::GetAccessSpecifier()
+ccrt::AccessSpecifier ccrt::Method::GetAccessSpecifier()
 {
 	return accessSpecifier_;
 }

@@ -4,7 +4,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI Macro : public IMacro
+	class Macro : public IMacro
 	{
 	public:
 		Macro(const MacroBuilder& macroBuilder);

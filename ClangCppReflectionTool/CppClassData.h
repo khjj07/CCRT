@@ -5,7 +5,7 @@
 namespace ccrt
 {
 
-	class CRRTAPI CppClassData : public ICppClassData
+	class CppClassData : public ICppClassData
 	{
 	public:
 		CppClassData(const CppClassBuilder& cpp_class_builder);

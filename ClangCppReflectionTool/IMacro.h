@@ -4,7 +4,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI IMacro
+	class IMacro
 	{
 	public:
 		enum Type

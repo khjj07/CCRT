@@ -3,7 +3,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI Enum : public IEnum
+	class Enum : public IEnum
 	{
 	public:
 		Enum(std::string name, std::string usr);

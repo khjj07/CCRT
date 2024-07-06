@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include <string>
-#include <istream>
-#include <ostream>
 #include <sstream>
-
 #include "AccessSpecifier.h"
-#include "Define.h"
 #include "IRDataField.h"
 
 namespace ccrt
@@ -14,22 +10,32 @@ namespace ccrt
 	class RDataField : public IRDataField
 	{
 	public:
-		RDataField(std::string  accessSpecifier, T& value);
+		RDataField(AccessSpecifier accessSpecifier, std::string name, T& value);
 
 	public:
+		std::string GetName() override;
 		std::string GetType() override;
+		AccessSpecifier GetAccessSpecifier() override;
+
+	protected:
 		std::string GetValue() override;
-		std::string GetAccessSpecifier() override;
 		void SetValue(std::string value) override;
 
 	private:
 		T& value_;
-		std::string  accessSpecifier_;
+		std::string name_;
+		AccessSpecifier accessSpecifier_;
 	};
 
 	template <typename T>
-	RDataField<T>::RDataField(std::string  accessSpecifier, T& value)
-		:accessSpecifier_(accessSpecifier),value_(value) {}
+	RDataField<T>::RDataField(AccessSpecifier accessSpecifier,std::string name, T& value)
+		:accessSpecifier_(accessSpecifier), name_(name),value_(value) {}
+
+	template <typename T>
+	std::string RDataField<T>::GetName()
+	{
+		return name_;
+	}
 
 	template <typename T>
 	std::string RDataField<T>::GetType()
@@ -46,7 +52,7 @@ namespace ccrt
 	}
 
 	template <typename T>
-	std::string  RDataField<T>::GetAccessSpecifier()
+	AccessSpecifier RDataField<T>::GetAccessSpecifier()
 	{
 		return accessSpecifier_;
 	}

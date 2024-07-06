@@ -6,11 +6,11 @@ std::string ccrt::AccessSpecifierToString(ccrt::AccessSpecifier access_specifier
 	switch (access_specifier)
 	{
 	case ccrt::Public:
-		return "public";
+		return "ccrt::Public";
 	case ccrt::Protected:
-		return "protected";
+		return "ccrt::Protected";
 	case ccrt::Private:
-		return "private";
+		return "ccrt::Private";
 	default:;
 	}
 	return {};

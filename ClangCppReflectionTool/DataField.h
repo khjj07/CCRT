@@ -1,17 +1,18 @@
 ﻿#pragma once
 #include <string>
 
+#include "AccessSpecifier.h"
 #include "IDataField.h"
 
 namespace ccrt
 {
-	class CRRTAPI DataField : public IDataField
+	class DataField : public IDataField
 	{
 	public:
-		DataField(std::string accessSpecifier, std::string type, std::string name, std::string usr, std::string defaultValue);
+		DataField(AccessSpecifier accessSpecifier, std::string type, std::string name, std::string usr, std::string defaultValue);
 	public:
 		std::string GetType() override;
-		std::string GetAccessSpecifier() override;
+		AccessSpecifier GetAccessSpecifier() override;
 		std::string GetName() override;
 		std::string GetUSR() override;
 		std::string GetDefaultValue() override;
@@ -19,7 +20,7 @@ namespace ccrt
 		void Deserialize(std::istringstream& stream) override;
 
 	private:
-		std::string accessSpecifier_;
+		AccessSpecifier accessSpecifier_;
 		std::string type_;
 		std::string usr_;
 		std::string name_;

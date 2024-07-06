@@ -4,7 +4,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI MacroBuilder : IBuilder<IMacro>
+	class MacroBuilder : IBuilder<IMacro>
 	{
 	public:
 		friend class Macro;

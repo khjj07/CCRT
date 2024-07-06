@@ -1,6 +1,6 @@
 ﻿#include "DataField.h"
 
-ccrt::DataField::DataField(std::string accessSpecifier, std::string type, std::string name, std::string usr, std::string defaultValue)
+ccrt::DataField::DataField(AccessSpecifier accessSpecifier, std::string type, std::string name, std::string usr, std::string defaultValue)
 	: accessSpecifier_(accessSpecifier),type_(type), name_(name), usr_(usr), defaultValue_(defaultValue) {}
 
 std::string ccrt::DataField::GetType()
@@ -8,7 +8,7 @@ std::string ccrt::DataField::GetType()
 	return type_;
 }
 
-std::string ccrt::DataField::GetAccessSpecifier()
+ccrt::AccessSpecifier ccrt::DataField::GetAccessSpecifier()
 {
 	return accessSpecifier_;
 }

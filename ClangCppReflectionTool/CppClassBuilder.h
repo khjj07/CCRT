@@ -11,7 +11,7 @@
 
 namespace ccrt
 {
-	class CRRTAPI CppClassBuilder : public IBuilder<ICppClassData>
+	class CppClassBuilder : public IBuilder<ICppClassData>
 	{
 	public:
 		friend class CppClassData;

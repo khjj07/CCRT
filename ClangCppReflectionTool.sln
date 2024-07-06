@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClangCppReflectionTool", "C
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CCRTExample", "CCRTExample\CCRTExample.vcxproj", "{8E6C1BB4-0E0A-4093-B5A8-931A2A39E55A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClangCppHeaderTool", "ClangCppHeaderTool\ClangCppHeaderTool.vcxproj", "{7A91D0F4-D49C-4817-B665-1683028D9516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{8E6C1BB4-0E0A-4093-B5A8-931A2A39E55A}.Release|x64.Build.0 = Release|x64
 		{8E6C1BB4-0E0A-4093-B5A8-931A2A39E55A}.Release|x86.ActiveCfg = Release|Win32
 		{8E6C1BB4-0E0A-4093-B5A8-931A2A39E55A}.Release|x86.Build.0 = Release|Win32
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Debug|x64.ActiveCfg = Debug|x64
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Debug|x64.Build.0 = Debug|x64
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Debug|x86.Build.0 = Debug|Win32
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Release|x64.ActiveCfg = Release|x64
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Release|x64.Build.0 = Release|x64
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Release|x86.ActiveCfg = Release|Win32
+		{7A91D0F4-D49C-4817-B665-1683028D9516}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

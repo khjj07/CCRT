@@ -23,18 +23,40 @@ int ccrt::CCRTHeaderGenerator::GenerateCCRTHeader(ICppClassData* sourceClass)
 		result += "{\n";
 		for (auto dataField : cppClass->GetDataFields())
 		{
-			result += "\tdataFields_.insert(std::make_pair(\"" + dataField->GetName() + "\",new ccrt::RDataField<" + dataField->GetType() + ">(\"" + dataField->GetAccessSpecifier() + "\", " + dataField->GetName() + ")));\n";
+			result += "\tAddDataField(\"" + dataField->GetName() + "\",new ccrt::RDataField<" + dataField->GetType() + ">(" + AccessSpecifierToString(dataField->GetAccessSpecifier()) + ", \"" + dataField->GetName() + "\", " + dataField->GetName() + "));\n";
 		}
 		for (auto method : cppClass->GetMethods())
 		{
-			result += "\tmethods_.insert(std::make_pair(\"" + method->GetName() + "\",ccrt::RMethod<" + method->GetReturnType();
+			result += "\tAddMethod(\"" + method->GetName() + "\", ccrt::RMethod<" + method->GetReturnType();
 			for (auto argument : method->GetArguments())
 			{
 				result += "," + argument;
 			}
-			result += ">::from_method<" + cppClass->GetName() + ",&" + cppClass->GetName() + "::" + method->GetName() + ">(this)));\n";
+			result += ">::Create<" + cppClass->GetName() + ",&" + cppClass->GetName() + "::" + method->GetName() + ">(this, " + AccessSpecifierToString(method->GetAccessSpecifier()) + ", \"" + method->GetName() + "\"));\n";
 		}
 		result += "}\n";
+
+		result += "std::ostream& operator<<(std::ostream& out, "+cppClass->GetName()+"*& reflectedClass)\n";
+		result += "{\n";
+		result += "\tif(reflectedClass)\n";
+		result += "\t{\n";
+		result += "\t\tout << reflectedClass->GetID();\n";
+		result += "\t}\n";
+		result += "\telse\n";
+		result += "\t{\n";
+		result += "\t\tout << \"nullptr\";\n";
+		result += "\t}\n";
+		result += "\treturn out;\n";
+		result += "}\n\n";
+
+		result += "std::istream& operator>>(std::istream& in, "+ cppClass->GetName() + "*& reflectedClass)\n";
+		result += "{\n";
+		result += "\tstd::string id;\n";
+		result += "\tin >> id;\n";
+		result += "\treflectedClass = ccrt::CCRTManager::Find<"+ cppClass->GetName() +">(id);\n";
+		result += "\treturn in;\n";
+		result += "}\n";
+
 		fileStream << result;
 	}
 	else
