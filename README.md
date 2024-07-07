@@ -4,141 +4,91 @@
 UnrealEngine의 PropertySystem을 참고하여 LLVM lib-clang을 기반으로 한 C++ 구문분석 리플랙션 도구를 개발
 
 ## 구현 설명
+1. lib-clang의 TranslationUnit을 통해 소스 헤더파일을 분석하고 Clang-AST트리로 토큰화
+2. clang_visitChildren 함수를 이용해 재귀적으로 순회하며 CppClassData를 생성
+3. 빌드 전 이벤트로 ClangCppHeaderTool.exe를 리플렉션 목표 프로젝트 경로를 인자로 실행하여 Reflection된 정보를 바탕으로 헤더파일(CCRT.h)을 생성
+4. CCRTManager에서 각 클래스의 Reflection된 정보를 등록하는 ApplyReflectionData 멤버함수를 호출
 
-
-
-## 예시
-### 1. Setup
----
-* main.cpp
-````C++
-#include "CCRTHeaderGenerator.h"
-#include "CCRTManager.h"
-#include "ClangCppParser.h"
-#include "A.hh"
-
-int main()
-{
-  	ccrt::ClangCppParser parser; //lib-clang 기반 CppParser
-  	ccrt::CCRTHeaderGenerator headerGenerator; //분석한 CppClassData를 바탕으로 Header를 생성 
-  	ccrt::CCRTManager ccrtManager; //생성된 리플랙션 데이터를 초기화 해주는 역할(A.CCRT.h)
-  
-  	const char* commandLineArgs[] = {
-  		"-I../ClangCppReflectionTool",
-  		"-E",
-  		"-std=c++17"
-  	}; //lib-clang Translation Arguments
-  
-  	auto result = parser.GenerateCppClassFromFile("../CCRTExample/A.hh", commandLineArgs,3); // 헤더 파일로부터 CppClassData 생성
-        headerGenerator.GenerateCCRTHeader(result);// CppClassData를 이용해 Header 생성
-
-  	A* test= new A();
-  	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 생성자 이후 호출되어야 함)
-}
-````
-### 2. UCLASS,UCLASS_BODY,UPROPERTY 매크로를 이용해 Reflection될 Class를 지정할수 있음
----
-* A.hh(clang 제약 조건으로 인해 hh 파일형식을 사용)
+## CCRTExample(사용 예시)
+* Foo.hh(clang 제약 조건으로 인해 hh 파일형식을 사용)
 ````C++
 #pragma once
-#include "Define.h"
-#include "ReflectedClass.h"
+#include "Bar.hh"
+#include "CCRT.h"
 
 UCLASS
-class A : public ccrt::ReflectedClass
+class Foo : public ccrt::ReflectedClass
 {
-  UCLASS_BODY
-  
-  public:
-  	UPROPERTY
-  		int x;
-  	UPROPERTY
-  		int y;
-  	UPROPERTY
-  		int z;
-  		int w;
-  
-  public:
-  	int Add(int a, int b);
+	UCLASS_BODY
+public:
+	UPROPERTY
+		int x = 30;
+	UPROPERTY
+		int y;
+	UPROPERTY
+		Bar* bar; //리플랙션된 클래스에 한해서 UPROPERTY로 사용할 수 있음
+public:
+	int Add(int a, int b);
 };
 ````
 
-
-* A.CCRT.h(CCRTHeaderGenerator을 통해 만들어진 헤더파일)
+* Foo.cpp
 ````C++
-#include "CCRT.h"
-#include "A.hh"
+#include "Foo.hh"
 
-void A::ApplyReflectionData()
-{
-	dataFields_.insert(std::make_pair("x",new ccrt::RDataField<int>("public", x)));
-	dataFields_.insert(std::make_pair("y",new ccrt::RDataField<int>("public", y)));
-	dataFields_.insert(std::make_pair("z",new ccrt::RDataField<int>("public", z)));
-	methods_.insert(std::make_pair("Add",ccrt::RMethod<int,int,int>::from_method<A,&A::Add>(this)));
-}
-````
-
-
-* A.cpp
-````C++
-#include "A.CCRT.h"
-
-int A::Add(int a, int b)
+int Foo::Add(int a, int b)
 {
 	return a+b;
 }
 ````
 
+* Bar.hh
+````C++
+#pragma once
+#include "Define.h"
+#include "CCRT.h"
 
-### 3. 멤버변수와 멤버함수에 이름을 통해 접근 가능
----
-* main.cpp(main문 안쪽)
- ````C++
-  A* test= new A();
-	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 생성자 이후 호출되어야 함)
-
-	test->GetDataField("x")->SetValue("30"); //이름으로 클래스의 변수에 접근 가능
-	int addResult = test->GetMethod("Add")->Invoke<int>(100, 20); //이름으로 함수 호출 가능(Invoke<리턴타입>(가변인자))
-
-	std::cout << "x : " << test->x << std::endl;
-	std::cout << "Add Result : " << addResult;
+UCLASS
+class Bar : public ccrt::ReflectedClass
+{
+	UCLASS_BODY
+public:
+	UPROPERTY
+		int a;
+	UPROPERTY
+		int b;
+};
 ````
----
+
 * main.cpp(전체)
 ````C++
 #include <iostream>
 
-#include "A.hh"
-#include "CCRTHeaderGenerator.h"
-#include "CCRTManager.h"
-#include "ClangCppParser.h"
-
-
+#include "Bar.hh"
+#include "Foo.hh"
+#include "Bar.CCRT.h"
+#include "Foo.CCRT.h"
+#include "CCRT.h"
 
 int main()
 {
-	ccrt::ClangCppParser parser; //lib-clang 기반 CppParser
-	ccrt::CCRTHeaderGenerator headerGenerator; //분석한 CppClassData를 바탕으로 Header를 생성 
 	ccrt::CCRTManager ccrtManager; //생성된 리플랙션 데이터를 초기화 해주는 역할(A.CCRT.h)
 
-	const char* commandLineArgs[] = {
-		"-I../ClangCppReflectionTool",
-		"-E",
-		"-std=c++17"
-	}; //lib-clang Translation Arguments
+	Foo* foo= new Foo();
+	Bar* bar = new Bar();
 
-	auto result = parser.GenerateCppClassFromFile("../CCRTExample/A.hh", commandLineArgs,3); // 헤더 파일로부터 CppClassData 생성
+	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 ReflectedClass를 상속받은 클래스 생성자 이후에 호출되어야 함)
 
-	headerGenerator.GenerateCCRTHeader(result);// CppClassData를 이용해 Header 생성
+	foo->Set("x", 50);
+	foo->Set("y", 100);
+	std::cout << "foo->Get<int>(\"x\") :" << foo->Get<int>("x") << std::endl << std::endl;
+	std::cout << "foo->Get<int>(\"y\") :" << foo->Get<int>("y") << std::endl << std::endl;
+	std::cout << "foo->Invoke<int>(\"Add\", 1000, 500) :" << foo->Invoke<int>("Add", 1000, 500) << std::endl << std::endl;
 
-	A* test= new A();
-	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 생성자 이후 호출되어야 함)
-
-	test->GetDataField("x")->SetValue("30"); //이름으로 클래스의 변수에 접근 가능
-	int addResult = test->GetMethod("Add")->Invoke<int>(100, 20); //이름으로 함수 호출 가능(Invoke<리턴타입>(가변인자))
-
-	std::cout << "x : " << test->x << std::endl;
-	std::cout << "Add Result : " << addResult;
+	foo->Set("bar", bar);
+	std::cout << "bar->GetID() : "<< bar->GetID() <<std::endl << std::endl;
+	std::cout << "foo->bar->GetID() : " << foo->bar->GetID() << std::endl << std::endl;
+	std::cout << "foo->Get<Bar*>(\"bar\")->GetID() : " << foo->Get<Bar*>("bar")->GetID() << std::endl << std::endl;
 
 	return 0;
 }
