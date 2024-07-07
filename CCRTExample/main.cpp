@@ -13,7 +13,7 @@ int main()
 	Foo* foo= new Foo();
 	Bar* bar = new Bar();
 
-	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 생성자 이후 호출되어야 함)
+	ccrtManager.Initialize();  //리플랙션 데이터 초기화(모든 ReflectedClass를 상속받은 클래스 생성자 이후에 호출되어야 함)
 
 	foo->Set("x", 50);
 	foo->Set("y", 100);
